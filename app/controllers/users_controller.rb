@@ -4,7 +4,16 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    if params[:email].blank?
+      @users = User.all
+    else
+      @user = User.find_by_email(params[:email])
+      if !@user.blank?
+        redirect_to user_path(@user, format: :json)
+      else
+        render :json => { :errors => "There's not user with specified email."}
+      end
+    end
   end
 
   # GET /users/1
