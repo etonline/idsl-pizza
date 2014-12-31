@@ -42,6 +42,8 @@ group :development, :test do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
+  # App server
+  gem 'unicorn'
 
 group :development do
   gem 'capistrano', '~> 3.3.0'
