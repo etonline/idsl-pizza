@@ -5,6 +5,13 @@ Rails.application.routes.draw do
 
   resources :products
 
+  resources :orders do
+    resources :order_details
+    post "done" => 'orders#done'
+  end
+
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Products</h1>
+<h1>Listing Order</h1>
 
 <table>
   <thead>
@@ -16,17 +16,17 @@
   </thead>
 
   <tbody>
-    <% @products.each do |product| %>
+    <% @orders.each do |order| %>
       <tr>
         <td><%= order.user_id %></td>
         <td><%= order.created_at %></td>
         <td><%= order.deliver_time %></td>
         <td><%= order.total_price %></td>
         <td><%= order.bonus %></td>
-        <td><%= order.pay_type %></td>
-        <td><%= link_to 'Show', product %></td>
-        <td><%= link_to 'Edit', edit_product_path(product) %></td>
-        <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= order.pay_type_id %></td>
+        <td><%= link_to 'Show', order %></td>
+        <td><%= link_to 'Edit', edit_order_path(order) %></td>
+        <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -34,4 +34,4 @@
 
 <br>
 
-<%= link_to 'New Product', new_product_path %>
+<%= link_to 'New Order', new_order_path %>

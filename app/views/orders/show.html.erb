@@ -22,17 +22,22 @@
 
 <p>
   <strong>Pay Type</strong>
-  <%= @order.pay_type %>
+  <%= @order.pay_type_id %>
 </p>
 
 <p>
   <strong>Order Phone</strong>
-  <%= @order.order_phone %>
+  <%= @order.contact_phone %>
 </p>
 
 <p>
   <strong>Order Address</strong>
-  <%= @order.order_address %>
+  <%= @order.deliver_address %>
+</p>
+
+<p>
+  <strong>Order Status</strong>
+  <%= @order.status %>
 </p>
 
 <%= link_to 'Edit', edit_order_path(@order) %> |
