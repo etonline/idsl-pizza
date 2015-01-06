@@ -41,7 +41,7 @@ class UsersController < ApplicationController
         render.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.json { render json: @user.errors, status: :unprocessable_entity, id: => "0" }
       end
     end
   end
@@ -68,6 +68,11 @@ class UsersController < ApplicationController
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def current_order
+    @order = Order.find(@user.current_order_id)
+    redirect_to order_path(@order, format: :json)
   end
 
   private
