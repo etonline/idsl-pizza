@@ -83,10 +83,11 @@ class OrdersController < ApplicationController
   end
 
   def done
+    if @order.status == "shopping"
       @order.status = "delivering"
       total = 0
-      @order.order_detail do |order_detail|
-        total = total + Product.find(order_detail.product_id)
+      @order.order_detail.each do |order_detail|
+        total = total + Product.find(order_detail.product_id).price
       end
       @order.total_price = total
       user = User.find(@order.user_id)
@@ -98,7 +99,10 @@ class OrdersController < ApplicationController
       user.save
       @order.save
       redirect_to order_path(@order, format: :json)
+    else
+      render :json => { :id => "0"}
     end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
