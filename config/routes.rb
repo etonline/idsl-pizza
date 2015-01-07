@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     post "done" => 'orders#done'
   end
 
+  get "top_seller" => 'products#top_seller'
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.
