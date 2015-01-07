@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   resources :users
 
-  resources :categories
-
-  resources :products
+  resources :categories do
+    resources :products
+  end
 
   resources :orders do
     resources :order_details
