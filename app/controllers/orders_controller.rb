@@ -87,7 +87,7 @@ class OrdersController < ApplicationController
       @order.status = "delivering"
       total = 0
       @order.order_detail.each do |order_detail|
-        total = total + Product.find(order_detail.product_id).price
+        total = total + Product.find(order_detail.product_id).price * order_detail.quantity
       end
       @order.total_price = total
       user = User.find(@order.user_id)
