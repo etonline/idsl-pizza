@@ -62,6 +62,11 @@ class ProductsController < ApplicationController
     end
   end
 
+  def top_seller
+    @top_products = Product.order(order_count: :desc).where.not(category_id: '2', order_count: nil, order_count: '0')
+    render :template => "products/top_seller.json"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
