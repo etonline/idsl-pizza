@@ -85,10 +85,10 @@ class OrdersController < ApplicationController
   def done
     if @order.status == "shopping"
       @order.status = "delivering"
-      total = 0
+      @total = 0
       @order.order_detail.each do |order_detail|
         product = Product.find(order_detail.product_id)
-        total = total + product.price * order_detail.quantity
+        @total = @total + product.price * order_detail.quantity
         if product.order_count.blank?
           product.order_count = 1
         else
@@ -96,15 +96,15 @@ class OrdersController < ApplicationController
         end
         product.save
       end
-      @order.total_price = total
+      @order.total_price = @total
       user = User.find(@order.user_id)
-      if user.bonus =< total
+      if user.bonus <= @total
         @order.bonus = user.bonus
-        new_bonus = (total - user.bonus) * 0.1
+        new_bonus = (@total - user.bonus) * 0.1
         user.bonus = new_bonus.round
       else
-        @order.bonus = user.bonus - total
-        new_bonus = user.bonus - total
+        @order.bonus = user.bonus - @total
+        new_bonus = user.bonus - @total
         user.bonus = new_bonus.round
       end
       user.current_order_id = 0
