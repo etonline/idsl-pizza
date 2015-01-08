@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :users
+  resources :users do
+    get "orders" => 'users#orders'
+  end
 
   resources :categories do
     resources :products

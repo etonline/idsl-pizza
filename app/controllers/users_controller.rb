@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :orders]
 
   # GET /users
   # GET /users.json
@@ -75,10 +75,19 @@ class UsersController < ApplicationController
     redirect_to order_path(@order, format: :json)
   end
 
+  def orders
+    @orders = Order.where(:user_id => @user.id)
+    render :template => "users/orders.json"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
+      if params[:user_id].blank?
+        @user = User.find(params[:id])
+      else
+        @user = User.find(params[:user_id])
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
