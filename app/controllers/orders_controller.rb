@@ -104,6 +104,7 @@ class OrdersController < ApplicationController
       end
       user.current_order_id = nil
       user.save
+      @order.order_time = Time.now()
       @order.save
       redirect_to order_path(@order, format: :json)
     else
