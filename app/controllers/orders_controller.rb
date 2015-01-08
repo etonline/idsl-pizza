@@ -100,11 +100,11 @@ class OrdersController < ApplicationController
       user = User.find(@order.user_id)
       if user.bonus <= total
         @order.bonus = user.bonus
-        new_bonus = (total_price - bonus) * 0.1
+        new_bonus = (total - bonus) * 0.1
         user.bonus = new_bonus.round
       else
-        @order.bonus = user.bonus - total_price
-        new_bonus = user.bonus - total_price
+        @order.bonus = user.bonus - total
+        new_bonus = user.bonus - total
         user.bonus = new_bonus.round
       end
       user.current_order_id = 0
