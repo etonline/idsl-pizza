@@ -98,11 +98,16 @@ class OrdersController < ApplicationController
       end
       @order.total_price = total
       user = User.find(@order.user_id)
-      if user.bonus < total
+      if user.bonus <= total
         @order.bonus = user.bonus
-        user.bonus = 0
+        new_bonus = (total_price - bonus) * 0.1
+        user.bonus = new_bonus.round
+      else
+        @order.bonus = user.bonus - total_price
+        new_bonus = user.bonus - total_price
+        user.bonus = new_bonus.round
       end
-      user.current_order_id = nil
+      user.current_order_id = 0
       user.save
       @order.order_time = Time.now()
       @order.save
