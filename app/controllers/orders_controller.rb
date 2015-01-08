@@ -29,7 +29,7 @@ class OrdersController < ApplicationController
     @order.status = "shopping"
     @user = User.find(order_params[:user_id])
     if !@user.blank?
-      if @user.current_order_id.blank?
+      if @user.current_order_id.blank? || @user.current_order_id == 0
         respond_to do |format|
           if @order.save
             @user.current_order_id = @order.id
