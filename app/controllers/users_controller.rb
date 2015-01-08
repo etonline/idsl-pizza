@@ -77,7 +77,7 @@ class UsersController < ApplicationController
 
   def orders
     @orders = Order.where(:user_id => @user.id)
-    render :template => "users/orders.json"
+    render :template => "orders/index.json"
   end
 
   private
