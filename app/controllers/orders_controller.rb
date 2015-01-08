@@ -102,6 +102,7 @@ class OrdersController < ApplicationController
         @bonus = 0
       else
         @bonus = user.bonus
+      end
       if @bonus <= @total
         @order.bonus = @bonus
         new_bonus = (@total - @bonus) * 0.1
