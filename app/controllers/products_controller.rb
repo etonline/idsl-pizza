@@ -63,7 +63,7 @@ class ProductsController < ApplicationController
   end
 
   def top_seller
-    @top_products = Product.order(order_count: :desc).where.not(category_id: '2', order_count: nil, order_count: '0')
+    @top_products = Product.order(order_count: :desc).where.not(category_id: '3', order_count: nil, order_count: '0')
     render :template => "products/top_seller.json"
   end
 
